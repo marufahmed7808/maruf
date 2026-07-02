@@ -53,6 +53,38 @@ nav a:hover{
 color:#38bdf8;
 }
 
+/* Hamburger Menu Button */
+.hamburger{
+display:none;
+flex-direction:column;
+cursor:pointer;
+background:none;
+border:none;
+padding:5px;
+}
+
+.hamburger span{
+width:28px;
+height:3px;
+background:white;
+margin:3px 0;
+border-radius:3px;
+transition:.3s;
+}
+
+/* Hamburger Animation */
+.hamburger.active span:nth-child(1){
+transform:rotate(45deg) translate(6px,6px);
+}
+
+.hamburger.active span:nth-child(2){
+opacity:0;
+}
+
+.hamburger.active span:nth-child(3){
+transform:rotate(-45deg) translate(6px,-6px);
+}
+
 .hero{
 min-height:100vh;
 display:flex;
@@ -181,6 +213,9 @@ background:#111827;
 margin-top:50px;
 }
 
+/* ===== Responsive Styles ===== */
+
+/* Tablet & Small Laptop */
 @media(max-width:900px){
 
 .hero{
@@ -198,11 +233,121 @@ font-size:45px;
 }
 
 header{
-flex-direction:column;
+padding:15px 5%;
+}
+
+}
+
+/* Mobile */
+@media(max-width:768px){
+
+header{
+padding:15px 5%;
+}
+
+.hamburger{
+display:flex;
 }
 
 nav{
-margin-top:15px;
+position:fixed;
+top:70px;
+left:-100%;
+width:100%;
+background:#111827;
+flex-direction:column;
+text-align:center;
+padding:30px 0;
+transition:.4s;
+box-shadow:0 10px 20px rgba(0,0,0,.4);
+display:flex;
+}
+
+nav.active{
+left:0;
+}
+
+nav a{
+margin:12px 0;
+font-size:18px;
+display:block;
+}
+
+.hero-text h1{
+font-size:36px;
+}
+
+.hero-text h3{
+font-size:20px;
+}
+
+.hero img{
+width:220px;
+}
+
+.title{
+font-size:32px;
+}
+
+.about p{
+font-size:16px;
+line-height:30px;
+}
+
+.skills{
+grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+gap:15px;
+}
+
+.skill{
+padding:20px;
+}
+
+.projects{
+grid-template-columns:1fr;
+}
+
+.contact p{
+font-size:18px;
+}
+
+section{
+padding:70px 5%;
+}
+
+}
+
+/* Small Mobile */
+@media(max-width:480px){
+
+.hero-text h1{
+font-size:28px;
+}
+
+.hero img{
+width:180px;
+}
+
+.logo{
+font-size:22px;
+}
+
+.btn{
+padding:12px 25px;
+font-size:14px;
+}
+
+.title{
+font-size:26px;
+}
+
+.skills{
+grid-template-columns:repeat(2,1fr);
+gap:12px;
+}
+
+.skill h2{
+font-size:16px;
 }
 
 }
@@ -216,7 +361,13 @@ margin-top:15px;
 
 <div class="logo">Maruf.</div>
 
-<nav>
+<button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+<span></span>
+<span></span>
+<span></span>
+</button>
+
+<nav id="navMenu">
 <a href="#home">Home</a>
 <a href="#about">About</a>
 <a href="#skills">Skills</a>
@@ -242,7 +393,7 @@ Web Development, Flutter and Digital Marketing.
 I love creating modern websites and learning new technologies.
 </p>
 
-<a href="#" class="btn">Download CV</a>
+<a href="https://drive.google.com/drive/folders/17_sqncO-PO5SeAQuZAPXxMllp_SeknGY?usp=sharing" class="btn">Download CV</a>
 
 </div>
 
@@ -374,6 +525,26 @@ Cisco Packet Tracer based network topology.
 © 2026 Maruf Ahmed | All Rights Reserved.
 
 </footer>
+
+<script>
+
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+hamburger.addEventListener('click', () => {
+hamburger.classList.toggle('active');
+navMenu.classList.toggle('active');
+});
+
+// Close menu when a nav link is clicked
+document.querySelectorAll('nav a').forEach(link => {
+link.addEventListener('click', () => {
+hamburger.classList.remove('active');
+navMenu.classList.remove('active');
+});
+});
+
+</script>
 
 </body>
 </html>
